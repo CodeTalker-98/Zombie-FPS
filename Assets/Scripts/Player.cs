@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _spd = 2.5f;
     [SerializeField] private float _jumpHeight = 5.0f;
     [SerializeField] private float _gravity = 9.81f;
+    [SerializeField] private float _sensitivity = 1.0f;
     private Vector3 _direction;
     private Vector3 _velocity;
     private CharacterController _controller;
@@ -26,12 +27,15 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("The MAIN CAMERA is NULL");
         }
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
         CameraRotation();
         Movement();
+        Controls();
     }
 
     void Movement()
@@ -50,9 +54,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        _velocity = transform.TransformDirection(_velocity);
-
         _velocity.y -= _gravity * Time.deltaTime;
+        _velocity = transform.TransformDirection(_velocity);
         _controller.Move(_velocity * Time.deltaTime);
     }
 
@@ -62,11 +65,19 @@ public class Player : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");
 
         Vector3 currentRotation = transform.localEulerAngles;
-        currentRotation.y += mouseX;
+        currentRotation.y += mouseX * _sensitivity;
         transform.localRotation = Quaternion.AngleAxis(currentRotation.y, Vector3.up);
 
         Vector3 currentCamRotation = _cam.gameObject.transform.localEulerAngles;
-        currentCamRotation.x -= mouseY;
+        currentCamRotation.x -= mouseY * _sensitivity;
         _cam.gameObject.transform.localRotation = Quaternion.AngleAxis(currentCamRotation.x, Vector3.right);
+    }
+
+    void Controls()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
