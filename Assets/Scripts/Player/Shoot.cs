@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+    [SerializeField] private GameObject _blood;
     private void Update()
     {
         Fire();
@@ -24,6 +25,7 @@ public class Shoot : MonoBehaviour
                 
                 if (health != null)
                 {
+                    Instantiate(_blood, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                     health.Damage(50);
                 }
             }

@@ -954,6 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634e0cbb225e1b549919a3dfbba7b250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blood: {fileID: 5192175068684042784, guid: 89c8bc12c826045588d79985900e38f1, type: 3}
 --- !u!114 &1917723797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,10 +1076,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 464507325855091443, guid: d7cb888f86d50c548b6a7eb3cac1da70,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7038561209944860750, guid: d7cb888f86d50c548b6a7eb3cac1da70,
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038561209944860750, guid: d7cb888f86d50c548b6a7eb3cac1da70,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7038561209944860754, guid: d7cb888f86d50c548b6a7eb3cac1da70,
         type: 3}

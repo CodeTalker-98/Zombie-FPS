@@ -8,8 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _jumpHeight = 5.0f;
     [SerializeField] private float _gravity = 9.81f;
     [SerializeField] private float _sensitivity = 1.0f;
-    private Vector3 _direction;
-    private Vector3 _velocity;
+    private float _yVelocity;
     private CharacterController _controller;
     private Camera _cam;
 
@@ -40,23 +39,27 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
+        float hInput = Input.GetAxisRaw("Horizontal");
+        float vInput = Input.GetAxisRaw("Vertical");
+
+        Vector3 direction = new Vector3(hInput, 0, vInput);
+        Vector3 velocity = direction * _spd;
+
         if (_controller.isGrounded)
         {
-            float hInput = Input.GetAxisRaw("Horizontal");
-            float vInput = Input.GetAxisRaw("Vertical");
-
-             _direction = new Vector3(hInput, 0, vInput);
-             _velocity = _direction * _spd;
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _velocity.y = _jumpHeight;
+                _yVelocity = _jumpHeight;
             }
         }
+        else
+        {
+            _yVelocity -= _gravity * Time.deltaTime;
+        }
 
-        _velocity.y -= _gravity * Time.deltaTime;
-        _velocity = transform.TransformDirection(_velocity);
-        _controller.Move(_velocity * Time.deltaTime);
+        velocity.y = _yVelocity;
+        velocity = transform.TransformDirection(velocity);
+        _controller.Move(velocity * Time.deltaTime);
     }
 
     void CameraRotation()

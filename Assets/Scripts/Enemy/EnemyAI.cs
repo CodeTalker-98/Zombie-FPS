@@ -16,7 +16,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float _fireRate = 1.0f;
     private float _attackTime = -1.0f;
     private Vector3 _velocity;
-    private bool _canAttack = false;
     private Transform _player;
     private Health _playerHealth;
     private CharacterController _controller;
