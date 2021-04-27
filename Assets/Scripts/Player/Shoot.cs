@@ -18,7 +18,7 @@ public class Shoot : MonoBehaviour
             Ray rayOrigin = Camera.main.ViewportPointToRay(center);
             RaycastHit hitInfo;
 
-            if (Physics.Raycast(rayOrigin, out hitInfo))
+            if (Physics.Raycast(rayOrigin, out hitInfo, Mathf.Infinity, 1 << 9 | 1 << 0))
             {
                 Debug.Log(hitInfo.collider.name);
                 Health health = hitInfo.collider.GetComponent<Health>();
